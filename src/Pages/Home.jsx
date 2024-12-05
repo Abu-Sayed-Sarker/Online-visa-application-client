@@ -21,7 +21,6 @@ const Home = () => {
         localStorage.setItem("theme", theme);
         settheme(!themes)
     };
-    console.log(themes);
 
 
 

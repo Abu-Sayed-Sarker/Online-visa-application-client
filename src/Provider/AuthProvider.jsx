@@ -14,8 +14,6 @@ const AuthProvider = ({children}) => {
     const [user, setuser] = useState(null);
     const [loder, setLoder] = useState(true);
 
-
-    console.log(user);
     
 
     // objarver using 
@@ -81,7 +79,7 @@ const AuthProvider = ({children}) => {
         LogOut,
         LogIn,
         GoogleLogin,
-        
+
         
     }
     
