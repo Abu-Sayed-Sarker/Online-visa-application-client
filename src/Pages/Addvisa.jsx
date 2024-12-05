@@ -34,6 +34,20 @@ const Addvisa = () => {
         const Data = {email, country, photo, visaType, Age, Required_documents, Validity, fee, method, Processing_time, description}
         
         console.log(Data);
+
+
+        fetch("http://localhost:5000/visas", {
+            method: "POST",
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(Data)
+        })
+            .then(res => res.json())
+            .then(data => {
+            console.log(data);
+            
+        })
     }
     return (
         <div className="bg-gray-200">
