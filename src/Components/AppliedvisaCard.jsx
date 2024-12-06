@@ -4,7 +4,7 @@
 
 const AppliedvisaCard = ({ visa, applications, setApplications }) => {
     const handelDelete = id => {
-        fetch(`http://localhost:5000/addedvisa/${id}`, {
+        fetch(`https://visa-navigate-server.vercel.app/addedvisa/${id}`, {
         method: 'DELETE'
         })
             .then(res => res.json())

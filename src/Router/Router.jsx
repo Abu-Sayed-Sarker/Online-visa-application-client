@@ -36,22 +36,22 @@ const Router = createBrowserRouter([
             {
                 path: '/allvisa',
                 element: <Allvisa></Allvisa>,
-                loader: ()=> fetch("http://localhost:5000/visas")
+                loader: ()=> fetch("https://visa-navigate-server.vercel.app/visas")
             },
             {
                 path: '/deteils/:id',
                 element: <PrivetRouter><Ditails></Ditails></PrivetRouter>,
-                loader: ({params})=> fetch(`http://localhost:5000/visas/id/${params.id}`)
+                loader: ({params})=> fetch(`https://visa-navigate-server.vercel.app/visas/id/${params.id}`)
             },
             {
                 path: '/visaapplications/:email',
                 element: <PrivetRouter><MyaddedApplication></MyaddedApplication></PrivetRouter>,
-                loader: ({params})=> fetch(`http://localhost:5000/addedvisa/${params.email}`)
+                loader: ({params})=> fetch(`https://visa-navigate-server.vercel.app/addedvisa/${params.email}`)
             },
             {
                 path: "/addedvisa/:email",
                 element: <PrivetRouter><MyAddedVisa></MyAddedVisa></PrivetRouter>,
-                loader: ({params})=>fetch(`http://localhost:5000/visas/${params.email}`)
+                loader: ({params})=>fetch(`https://visa-navigate-server.vercel.app/visas/${params.email}`)
             }
         ],
     },

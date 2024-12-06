@@ -3,6 +3,8 @@ import Navbar from "../Components/Navbar";
 import { Toaster } from "react-hot-toast";
 
 const Layout = () => {
+    console.log(import.meta.env.VITE_apiKey);
+    
     return (
         <div>
             <Navbar></Navbar>
