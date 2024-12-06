@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { themeChange } from "theme-change";
 import Banner from "../Components/HomePage/Banner";
 import VisaCatagory from "../Components/HomePage/visaCatagory";
+import LetestVisa from "../Components/HomePage/LetestVisa";
 
 
 
@@ -43,6 +44,7 @@ const Home = () => {
 
             <Banner></Banner>
             <VisaCatagory></VisaCatagory>
+            <LetestVisa></LetestVisa>
         </div>
     );
 };
