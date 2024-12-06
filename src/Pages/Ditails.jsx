@@ -5,12 +5,48 @@ import { useContext, useState } from "react";
 import { AuthContext } from "../Provider/AuthProvider";
 
 const Ditails = () => {
-    const {user} = useContext(AuthContext)
+    const { user } = useContext(AuthContext)
     const visa = useLoaderData()
 
 
-    const [Dates, setDate] = useState(new Date())
-    console.log(visa);
+    const [Dates, setDate] = useState(new Date());
+    const date = `${Dates.getDay()}/${Dates.getMonth()}/${Dates.getFullYear()}`
+
+
+    const submitAddVisa = e => {
+        e.preventDefault();
+
+        const form = new FormData(e.target);
+        const Email = form.get("Email");
+        const firstName = form.get("firstName");
+        const LastName = form.get("LastName");
+
+
+        const countryName = visa.country;
+        const price = visa.fee;
+        const img = visa.photo;
+        const type = visa.visaType;
+        const prossingTime = visa.Processing_time;
+        const validati = visa.Validity;
+        const Method = visa.method;
+
+        const AddApplication = { Email, firstName, LastName, countryName, img, Method, validati, type, price, prossingTime, date };
+
+
+        fetch("http://localhost:5000/addedvisa", {
+            method: "POST",
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(AddApplication)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                e.target.reset();
+
+            })
+    }
 
     return (
         <div className="bg-gray-200">
@@ -25,31 +61,70 @@ const Ditails = () => {
                                 alt="Shoes"
                                 className="rounded-xl border-pink-600 border-2" />
                         </figure>
-                        <div className="card-body items-center text-center">
-                            <h2 className="card-title text-4xl">{visa.country}</h2>
-                            <p>{visa.description}</p>
+                        <div className="card-body lg:w-9/12 mx-auto">
+                            <h2 className="text-center mx-auto card-title text-4xl pb-5">{visa.country}</h2>
+                            <div>
+                                <div className="flex lg:justify-between lg:flex-row flex-col justify-center lg:text-left text-center">
+                                    <div>
+                                        <label>
+                                            <p className="font-semibold text-xl">Visa Type</p>
+                                            <p>{visa.visaType}</p>
+                                        </label>
+                                        <label>
+                                            <p className="font-semibold text-xl">Visa Validity time</p>
+                                            <p>{visa.Validity}</p>
+                                        </label>
+                                        <label>
+                                            <p className="font-semibold text-xl">Description</p>
+                                            <p>{visa.description}</p>
+                                        </label>
+                                    </div>
+                                    <div>
+                                        <label>
+                                            <p className="font-semibold text-xl">Visa Fee</p>
+                                            <p>{visa.fee}</p>
+                                        </label>
+                                        <label>
+                                            <p className="font-semibold text-xl">Processing time</p>
+                                            <p>{visa.Processing_time}</p>
+                                        </label>
+                                        <label>
+                                            <p className="font-semibold text-xl">Application method</p>
+                                            <p>{visa.method}</p>
+                                        </label>
+                                    </div>
+                                    <div>
+                                        <p className="font-semibold text-xl">Required documents</p>
+                                        {
+                                            visa.Required_documents.map((d, index) => <li className="list-none" key={index}>{d}</li>)
+                                        }
+                                    </div>
+                                </div>
+
+
+                            </div>
                             <div className="card-actions">
                                 {/* Open the modal using document.getElementById('ID').showModal() method */}
-                                <button className="btn bg-pink-600 hover:bg-pink-400" onClick={() => document.getElementById('my_modal_5').showModal()}>Apply Now</button>
+                                <button className="mt-5 btn mx-auto bg-pink-600 hover:bg-pink-400" onClick={() => document.getElementById('my_modal_5').showModal()}>Apply Now</button>
                                 <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
                                     <div className="modal-box">
 
 
-                                        <form method="dialog">
+                                        <form onSubmit={submitAddVisa} method="dialog">
                                             <div className="flex flex-col gap-3">
                                                 <p className="text-left">Enter email</p>
-                                                <input type="text" defaultValue={`${user.email}`} required placeholder="Type here" className="input input-bordered w-full" />
+                                                <input name="Email" type="text" value={`${user.email}`} required placeholder="Type here" className="input input-bordered w-full" />
                                                 <div className="flex gap-3">
-                                                    <input type="text" required placeholder="First Name" className="input input-bordered w-ful" />
-                                                    <input type="text" required placeholder="Last Name" className="input input-bordered w-full" />
+                                                    <input name="firstName" type="text" required placeholder="First Name" className="input input-bordered w-ful" />
+                                                    <input name="LastName" type="text" required placeholder="Last Name" className="input input-bordered w-full" />
                                                 </div>
                                                 <div className="flex gap-3">
                                                     <DatePicker className="input input-bordered w-ful" selected={Dates} onChange={(Date) => setDate(Date)}></DatePicker>
-                                                    <input defaultValue={`${visa.fee}`} type="text" required placeholder="Visa Fee" className="input input-bordered w-full" />
+                                                    <input value={`${visa.fee}`} type="text" required placeholder="Visa Fee" className="input input-bordered w-full" />
                                                 </div>
                                             </div>
                                             {/* if there is a button in form, it will close the modal */}
-                                            <button className="btn mt-4 bg-pink-600 hover:bg-pink-400">Apply</button>
+                                            <button onClick={() => document.getElementById('my_modal_5').close()} className="btn mt-4 bg-pink-600 hover:bg-pink-400">Apply</button>
                                         </form>
 
                                     </div>

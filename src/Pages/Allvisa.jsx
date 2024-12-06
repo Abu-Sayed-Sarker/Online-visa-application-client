@@ -7,7 +7,7 @@ const Allvisa = () => {
 
 
     const [visas, setvisa] = useState(allVisa)
-    console.log(visas);
+
     
 
 

@@ -8,6 +8,7 @@ import PrivetRouter from "./PrivetRouter";
 import Addvisa from "../Pages/Addvisa";
 import Allvisa from "../Pages/Allvisa";
 import Ditails from "../Pages/Ditails";
+import MyaddedApplication from "../Pages/MyaddedApplication";
 
 
 const Router = createBrowserRouter([
@@ -40,6 +41,11 @@ const Router = createBrowserRouter([
                 path: '/deteils/:id',
                 element: <PrivetRouter><Ditails></Ditails></PrivetRouter>,
                 loader: ({params})=> fetch(`http://localhost:5000/visas/${params.id}`)
+            },
+            {
+                path: '/visaapplications/:email',
+                element: <PrivetRouter><MyaddedApplication></MyaddedApplication></PrivetRouter>,
+                loader: ({params})=> fetch(`http://localhost:5000/addedvisa/${params.email}`)
             }
         ],
     },
