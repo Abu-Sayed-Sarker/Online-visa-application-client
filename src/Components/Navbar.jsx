@@ -1,17 +1,41 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { AuthContext } from "../Provider/AuthProvider";
 import { Tooltip } from "react-tooltip";
 import toast from "react-hot-toast";
+import { themeChange } from "theme-change";
+import { MdLightMode, MdNightlight } from "react-icons/md";
 
 const Navbar = () => {
+
+    const [themes, settheme] = useState(true);
+
+    useEffect(() => {
+        themeChange(false);
+
+        // Set theme from localStorage on load
+        const savedTheme = localStorage.getItem("theme");
+        if (savedTheme) {
+            document.documentElement.setAttribute("data-theme", savedTheme);
+        }
+    }, []);
+
+    const handleThemeChange = (theme) => {
+        document.documentElement.setAttribute("data-theme", theme);
+        localStorage.setItem("theme", theme);
+        settheme(!themes)
+    };
+
+
+
+
 
     const { user, LogOut } = useContext(AuthContext);
 
 
 
     const navigate = useNavigate()
-    
+
 
 
     const hendelSignOutButton = () => {
@@ -19,12 +43,12 @@ const Navbar = () => {
             .then(() => {
                 toast.success("Log Out Success");
                 navigate("/")
-            
+
             })
             .catch((error) => {
                 console.log(error);
-                
-              });
+
+            });
     }
 
 
@@ -70,24 +94,33 @@ const Navbar = () => {
                     </ul>
                 </div>
                 <div className="navbar-end">
+                    <div>
+                        {
+                            themes ? <button onClick={() => handleThemeChange("dark")} data-set-theme="dark" className="btn bg-transparent border rounded-full hover:bg-pink-600 text-2xl p-0 px-[12px] mr-3">
+                                <MdNightlight />
+                            </button> : <button onClick={() => handleThemeChange("light")} data-set-theme="light" className="btn bg-transparent border rounded-full hover:bg-pink-600 text-2xl p-0 px-[12px] mr-3">
+                                <MdLightMode />
+                            </button>
+                        }
+                    </div>
 
 
 
                     {
                         user && user?.email ?
                             <div className="flex gap-3">
-                                <div 
+                                <div
                                     className="hidden lg:block"
                                     data-tooltip-id="my-tooltip"
                                     data-tooltip-content={`${user.email}`}
-                                    data-tooltip-place="top"
+                                    data-tooltip-place="left"
                                 >
                                     <div className="avatar online pt-2">
                                         <div className="w-10 rounded-full cursor-pointer">
                                             <img src={user?.photoURL} />
                                         </div>
                                     </div>
-                                <Tooltip id="my-tooltip" />
+                                    <Tooltip id="my-tooltip" />
                                 </div>
                                 <Link to={'/login'}><a onClick={hendelSignOutButton} className="btn bg-pink-600 hover:bg-pink-400 text-black rounded-full lg:px-7">Log Out</a></Link>
 

@@ -1,5 +1,7 @@
 /* eslint-disable react/prop-types */
 
+import { Link } from "react-router-dom";
+
 const VisaCard = ({visa}) => {
     return (
         <div>
@@ -38,7 +40,7 @@ const VisaCard = ({visa}) => {
                         </div>
                     </div>
                     <div className="card-actions justify-end">
-                        <button className="btn bg-pink-600 hover:bg-pink-400">Details</button>
+                        <Link to={"/allvisa"}><button className="btn bg-pink-600 hover:bg-pink-400">See all visas</button></Link>
 
                     </div>
                 </div>
