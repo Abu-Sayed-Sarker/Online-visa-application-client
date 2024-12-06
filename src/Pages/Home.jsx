@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { themeChange } from "theme-change";
 import Banner from "../Components/HomePage/Banner";
+import VisaCatagory from "../Components/HomePage/visaCatagory";
 
 
 
@@ -41,6 +42,7 @@ const Home = () => {
             </div>
 
             <Banner></Banner>
+            <VisaCatagory></VisaCatagory>
         </div>
     );
 };
