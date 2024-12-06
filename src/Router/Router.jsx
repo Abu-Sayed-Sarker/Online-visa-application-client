@@ -9,6 +9,7 @@ import Addvisa from "../Pages/Addvisa";
 import Allvisa from "../Pages/Allvisa";
 import Ditails from "../Pages/Ditails";
 import MyaddedApplication from "../Pages/MyaddedApplication";
+import MyAddedVisa from "../Pages/MyAddedVisa";
 
 
 const Router = createBrowserRouter([
@@ -40,12 +41,17 @@ const Router = createBrowserRouter([
             {
                 path: '/deteils/:id',
                 element: <PrivetRouter><Ditails></Ditails></PrivetRouter>,
-                loader: ({params})=> fetch(`http://localhost:5000/visas/${params.id}`)
+                loader: ({params})=> fetch(`http://localhost:5000/visas/id/${params.id}`)
             },
             {
                 path: '/visaapplications/:email',
                 element: <PrivetRouter><MyaddedApplication></MyaddedApplication></PrivetRouter>,
                 loader: ({params})=> fetch(`http://localhost:5000/addedvisa/${params.email}`)
+            },
+            {
+                path: "/addedvisa/:email",
+                element: <PrivetRouter><MyAddedVisa></MyAddedVisa></PrivetRouter>,
+                loader: ({params})=>fetch(`http://localhost:5000/visas/${params.email}`)
             }
         ],
     },
