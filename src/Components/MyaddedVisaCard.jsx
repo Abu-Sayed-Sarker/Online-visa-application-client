@@ -1,9 +1,25 @@
 /* eslint-disable react/prop-types */
 
+import { useState } from "react";
+
 const MyaddedVisaCard = ({ allvisa, visas, setVisas }) => {
 
+
+
+    const [currentVisaId, setCurrentVisaId] = useState(null);
+    const [photo, setPhoto] = useState(null);
+    const [name, setName] = useState(null);
+    const [validaty, setVAlidaty] = useState(null);
+    const [Fee, setFee] = useState(null);
+
+
+    console.log(photo);
+    
+
+    
+
     const handelDelete = id => {
-        fetch(`http://localhost:5000/visas/${id}`, {
+        fetch(`https://visa-navigate-server.vercel.app/visas/${id}`, {
             method: 'DELETE'
         })
             .then(res => res.json())
@@ -17,40 +33,44 @@ const MyaddedVisaCard = ({ allvisa, visas, setVisas }) => {
     }
 
 
-    const submitUpdateVisa = e => {
+const submitUpdateVisa = async (e) => {
         e.preventDefault();
 
-
         const form = new FormData(e.target);
-        const Photo = form.get("Photo") ? form.get("Photo") : (allvisa.photo);
-        const country = form.get("country");
-        const validity = form.get("validity");
-        const VisaType = form.get("visa-type");
-        const method = form.get("method");
-        const Price = form.get("Price");
-        const age = form.get("age");
-        const id = form.get("id");
+    const updatedVisa = {
+            country: form.get("country") || name,
+            validity: form.get("validity") || validaty,
+            VisaType: form.get("visa-type") || allvisa.visaType,
+            method: form.get("method") || allvisa.method,
+            price: form.get("Price") || Fee,
+            age: form.get("age") || allvisa.age,
+            photo: form.get("Photo") || photo,
+    };
+    console.log(updatedVisa.photo);
+    
 
-        const allData = { country, Photo, VisaType, age, validity, Price, method }
-        
-        console.log(allData);
+        try {
+            const response = await fetch(`https://visa-navigate-server.vercel.app/visas/${currentVisaId}`, {
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(updatedVisa),
+            });
+            const result = await response.json();
 
-        fetch(`https://visa-navigate-server.vercel.app/visas/${id}`, {
-            method: "PATCH",
-            headers: {
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify(allData)
-        })
-            .then(res => res.json())
-            .then(data => {
-            console.log(data);
-            
-        })
-
-
-
-    }
+            if (response.ok) {
+                alert("Visa updated successfully!");
+                // Optionally refresh visas list here by re-fetching or updating state
+                
+            } else {
+                alert(`Failed to update visa: ${result.message}`);
+            }
+        } catch (error) {
+            console.error("Error updating visa:", error);
+            alert("An error occurred while updating the visa.");
+        }
+    };
 
     return (
         <div>
@@ -96,15 +116,21 @@ const MyaddedVisaCard = ({ allvisa, visas, setVisas }) => {
                     </div>
 
                     <div className="card-actions justify-end">
-                        <button className="btn bg-pink-600 hover:bg-pink-400 text-black" onClick={() => document.getElementById('my_modal_5').showModal()}>Update Visa</button>
+                        <button className="btn bg-pink-600 hover:bg-pink-400 text-black" onClick={() => {
+                            document.getElementById('my_modal_5').showModal()
+                            setCurrentVisaId(allvisa._id)
+                            setPhoto(allvisa.photo)
+                            setName(allvisa.country)
+                            setVAlidaty(allvisa.Validity)
+                            setFee(allvisa.fee)
+                        }}>Update Visa</button>
                         <button onClick={() => handelDelete(allvisa._id)} className="btn bg-pink-600 hover:bg-pink-400 text-black">Delete Visa</button>
                         <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
                             <div className="modal-box">
                                 <form onSubmit={submitUpdateVisa} method="dialog">
                                     <div className="flex flex-col gap-3">
                                         <p className="text-left">Upadate Photo URL</p>
-                                        <input name="Photo" type="text" placeholder="Type here" className="input input-bordered w-full" />
-                                        <input name="id" value={allvisa._id} type="text" placeholder="Type here" className="input input-bordered w-full hidden" />
+                                        <input name="Photo" type="text" defaultValue={`${photo}`} placeholder="Type here" className="input input-bordered w-full" />
                                         <label className="flex gap-3">
                                             <input name="country" type="text" placeholder="Country Name" className="input input-bordered w-ful" />
                                             <input name="validity" type="text" placeholder="Validity" className="input input-bordered w-full" />
@@ -130,8 +156,8 @@ const MyaddedVisaCard = ({ allvisa, visas, setVisas }) => {
                                         </label>
                                         <label className="flex gap-3">
 
-                                            <input name="Price" type="number" placeholder="Visa Fee" className="input input-bordered w-full" />
-                                            <input name="age" type="number" placeholder="Age" className="input input-bordered w-full" />
+                                            <input name="Price" type="Number" placeholder="Visa Fee" className="input input-bordered w-full" />
+                                            <input name="age" type="Number" placeholder="Age" className="input input-bordered w-full" />
                                         </label>
                                     </div>
                                     {/* if there is a button in form, it will close the modal */}

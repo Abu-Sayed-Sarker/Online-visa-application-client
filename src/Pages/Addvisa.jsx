@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { AuthContext } from "../Provider/AuthProvider";
+import toast from "react-hot-toast";
 
 const Addvisa = () => {
 
@@ -44,7 +45,10 @@ const Addvisa = () => {
         })
             .then(res => res.json())
             .then(data => {
-            console.log(data);
+                toast.success("Add new visa successfully")
+                e.target.reset();
+                console.log(data);
+                
             
         })
     }

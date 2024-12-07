@@ -1,10 +1,10 @@
 import { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../Provider/AuthProvider";
 import toast from "react-hot-toast";
-
+import img from "../../src/assets/login-image.png"
 const Register = () => {
-
+    const navigate = useNavigate();
     const { createUser, setuser, upDaterofile } = useContext(AuthContext);
 
 
@@ -28,10 +28,11 @@ const Register = () => {
             .then((result) => {
                 const user = result.user;
                 setuser(user)
-                toast.success("Log In success")
+                toast.success("Register Is success")
                 upDaterofile({ displayName: name, photoURL: photo })
                     .then(() => {
-                        
+                    navigate("/")
+                    e.target.reset();
                     }).catch((err) => {
                         const errorCode = err.code;
                         toast.error(errorCode)
@@ -41,7 +42,7 @@ const Register = () => {
             })
             .catch((error) => {
                 const errorCode = error.code;
-                alert(errorCode)
+                toast.error(errorCode)
 
                 // ..
             });
@@ -61,7 +62,7 @@ const Register = () => {
         }
     }
     return (
-        <div>
+        <div className="lg:w-10/12 mx-auto flex lg:justify-between">
             <div className="card bg-third-color w-full max-w-lg shrink-0 shadow-2xl p-10">
                 <h2 className="text-center font-semibold text-4xl">Register your account</h2>
                 <form onSubmit={henselSubmission} className="card-body">
@@ -95,6 +96,10 @@ const Register = () => {
                     </div>
                 </form>
                 <p className="text-center font-semibold">Already Have An Account ? <Link to={"/Login"} className="text-red-600">Log In</Link></p>
+            </div>
+            <div className="lg:block hidden pt-8">
+                <img src={img} alt="" />
+
             </div>
         </div>
     );

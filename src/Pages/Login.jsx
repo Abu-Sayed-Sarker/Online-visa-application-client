@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../Provider/AuthProvider";
 import { GoogleAuthProvider } from "firebase/auth";
 import toast from "react-hot-toast";
+import img from "../../src/assets/login1.png"
 
 const Login = () => {
 
@@ -47,16 +48,16 @@ const Login = () => {
         GoogleLogin(provider)
         .then((result) => {
             setuser(result.user)
-            alert("Log In Success");
+            toast.success("Log In Success");
             navigate("/")
             }).catch((error) => {
                 // Handle Errors here.
                 const errorCode = error.code
-                alert(errorCode)
+                toast.error(errorCode)
             })
     }
     return (
-        <div>
+        <div className="lg:w-10/12 flex mx-auto">
             <div className="card bg-third-color w-full max-w-lg shrink-0 shadow-2xl p-10">
                 <h2 className="text-center font-semibold text-4xl">Login your account</h2>
                 <form onSubmit={handleLoginSubmission} className="card-body">
@@ -83,6 +84,9 @@ const Login = () => {
                     <button onClick={googleLogInBtn} className="text-left btn bg-transparent bg-secound-color hover:bg-farst-color hover:text-white"><FaGoogle /> Login with Google</button>
                 </div>
                 <p className="text-center font-semibold">Dont’t Have An Account ? <Link to={"/register"} className="text-red-600">Register</Link></p>
+            </div>
+            <div className="lg:block hidden">
+                <img src={img} alt="" />
             </div>
         </div>
     );
