@@ -59,7 +59,7 @@ const Login = () => {
     return (
         <div className="lg:w-10/12 flex mx-auto">
             <div className="card bg-third-color w-full max-w-lg shrink-0 shadow-2xl p-10">
-                <h2 className="text-center font-semibold text-4xl">Login your account</h2>
+                <h2 className="text-center text-pink-600 font-semibold text-4xl lg:pb-14">Login your account</h2>
                 <form onSubmit={handleLoginSubmission} className="card-body">
                     <div className="form-control">
                         <label className="label">
@@ -77,11 +77,11 @@ const Login = () => {
                         </label>
                     </div>
                     <div className="form-control mt-6 ">
-                        <button className="btn btn-primary bg-secound-color hover:bg-farst-color text-black hover:text-white">Login</button>
+                        <button className="btn btn-primary bg-pink-600 hover:bg-pink-400 text-black">Login</button>
                     </div>
                 </form>
                 <div className="mx-auto pb-3">
-                    <button onClick={googleLogInBtn} className="text-left btn bg-transparent bg-secound-color hover:bg-farst-color hover:text-white"><FaGoogle /> Login with Google</button>
+                    <button onClick={googleLogInBtn} className="text-left btn bg-transparent bg-pink-600 hover:bg-pink-400"><FaGoogle /> Login with Google</button>
                 </div>
                 <p className="text-center font-semibold">Dont’t Have An Account ? <Link to={"/register"} className="text-red-600">Register</Link></p>
             </div>

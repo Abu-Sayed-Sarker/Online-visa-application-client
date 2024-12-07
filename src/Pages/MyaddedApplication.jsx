@@ -26,7 +26,7 @@ const MyaddedApplication = () => {
                 setApplications(data)
 
             })
-    }, [scarch])
+    }, [email, scarch])
     return (
         <div className="bg-gray-200">
             <div className="w-10/12 mx-auto">

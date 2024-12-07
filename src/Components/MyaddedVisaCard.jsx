@@ -1,9 +1,11 @@
 /* eslint-disable react/prop-types */
 
 import { useState } from "react";
+import toast from "react-hot-toast";
 
-const MyaddedVisaCard = ({ allvisa, visas, setVisas }) => {
+const MyaddedVisaCard = ({ visa, visas, setVisas }) => {
 
+    const [allvisa, setvisa] = useState(visa)
 
 
     const [currentVisaId, setCurrentVisaId] = useState(null);
@@ -13,10 +15,9 @@ const MyaddedVisaCard = ({ allvisa, visas, setVisas }) => {
     const [Fee, setFee] = useState(null);
 
 
-    console.log(photo);
-    
+    console.log(currentVisaId)
 
-    
+
 
     const handelDelete = id => {
         fetch(`https://visa-navigate-server.vercel.app/visas/${id}`, {
@@ -33,11 +34,26 @@ const MyaddedVisaCard = ({ allvisa, visas, setVisas }) => {
     }
 
 
-const submitUpdateVisa = async (e) => {
+    const submitUpdateVisa = async (e) => {
         e.preventDefault();
 
+        console.log(currentVisaId);
+
+
         const form = new FormData(e.target);
-    const updatedVisa = {
+        
+
+
+        //array
+
+        const passport = e.target.passport.checked == true ? form.get("passport") : "";
+        const application = e.target.application.checked == true ? form.get("application") : "";
+        const userphoto = e.target.userphoto.checked == true ? form.get("userphoto") : "";
+
+
+        const Required_documents = [passport, application, userphoto];
+
+        const updatedVisa = {
             country: form.get("country") || name,
             validity: form.get("validity") || validaty,
             VisaType: form.get("visa-type") || allvisa.visaType,
@@ -45,12 +61,15 @@ const submitUpdateVisa = async (e) => {
             price: form.get("Price") || Fee,
             age: form.get("age") || allvisa.age,
             photo: form.get("Photo") || photo,
-    };
-    console.log(updatedVisa.photo);
-    
+            description: form.get("description") || allvisa.description,
+            Processing_time: form.get("Processing_time") || allvisa.description,
+            Required_documents: Required_documents
+        };
+        console.log(updatedVisa.photo);
+
 
         try {
-            const response = await fetch(`https://visa-navigate-server.vercel.app/visas/${currentVisaId}`, {
+            const response = await fetch(`https://visa-navigate-server.vercel.app/visas/id/${currentVisaId}`, {
                 method: "PATCH",
                 headers: {
                     "Content-Type": "application/json",
@@ -60,15 +79,15 @@ const submitUpdateVisa = async (e) => {
             const result = await response.json();
 
             if (response.ok) {
-                alert("Visa updated successfully!");
+                toast.success("Visa updated successfully!");
                 // Optionally refresh visas list here by re-fetching or updating state
-                
+
             } else {
-                alert(`Failed to update visa: ${result.message}`);
+                toast.error(`Failed to update visa: ${result.message}`);
             }
         } catch (error) {
             console.error("Error updating visa:", error);
-            alert("An error occurred while updating the visa.");
+            toast.error("An error occurred while updating the visa.");
         }
     };
 
@@ -117,7 +136,7 @@ const submitUpdateVisa = async (e) => {
 
                     <div className="card-actions justify-end">
                         <button className="btn bg-pink-600 hover:bg-pink-400 text-black" onClick={() => {
-                            document.getElementById('my_modal_5').showModal()
+                            document.getElementById(allvisa._id).showModal()
                             setCurrentVisaId(allvisa._id)
                             setPhoto(allvisa.photo)
                             setName(allvisa.country)
@@ -125,12 +144,12 @@ const submitUpdateVisa = async (e) => {
                             setFee(allvisa.fee)
                         }}>Update Visa</button>
                         <button onClick={() => handelDelete(allvisa._id)} className="btn bg-pink-600 hover:bg-pink-400 text-black">Delete Visa</button>
-                        <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
+                        <dialog id={allvisa._id} className="modal modal-bottom sm:modal-middle">
                             <div className="modal-box">
                                 <form onSubmit={submitUpdateVisa} method="dialog">
                                     <div className="flex flex-col gap-3">
                                         <p className="text-left">Upadate Photo URL</p>
-                                        <input name="Photo" type="text" defaultValue={`${photo}`} placeholder="Type here" className="input input-bordered w-full" />
+                                        <input name="Photo" type="text" placeholder="Type here" className="input input-bordered w-full" />
                                         <label className="flex gap-3">
                                             <input name="country" type="text" placeholder="Country Name" className="input input-bordered w-ful" />
                                             <input name="validity" type="text" placeholder="Validity" className="input input-bordered w-full" />
@@ -138,9 +157,9 @@ const submitUpdateVisa = async (e) => {
                                         <label className="flex gap-3">
                                             <select name="visa-type" className="select select-bordered w-full">
                                                 <option disabled selected>Select Visa type</option>
-                                                <option>Tourist visa</option>
-                                                <option>Student visa</option>
-                                                <option>Official visa</option>
+                                                <option>Tourist-visa</option>
+                                                <option>Student-visa</option>
+                                                <option>Official-visa</option>
                                             </select>
 
                                             <select name="method" className="select select-bordered w-full">
@@ -154,14 +173,42 @@ const submitUpdateVisa = async (e) => {
 
 
                                         </label>
+                                        <input name="Processing_time" type="text" placeholder="Processing time here" className="input input-bordered w-full" />
                                         <label className="flex gap-3">
 
                                             <input name="Price" type="Number" placeholder="Visa Fee" className="input input-bordered w-full" />
                                             <input name="age" type="Number" placeholder="Age" className="input input-bordered w-full" />
                                         </label>
+
+                                        <div className="p-3">
+                                            <div className="form-control">
+                                                <label className="label cursor-pointer">
+                                                    <span className="label-text">Valid passport</span>
+                                                    <input name="passport" type="checkbox" value={"Valid passport"} className="checkbox" />
+                                                </label>
+                                            </div>
+                                            <div className="form-control">
+                                                <label className="label cursor-pointer">
+                                                    <span className="label-text">Visa application form</span>
+                                                    <input name="application" type="checkbox" value={"Visa application"} className="checkbox" />
+                                                </label>
+                                            </div>
+                                            <div className="form-control">
+                                                <label className="label cursor-pointer">
+                                                    <span className="label-text">Recent passport-sized photograph</span>
+                                                    <input name="userphoto" value={"passport-sized photograph"} type="checkbox" className="checkbox" />
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div className="w-full">
+                                            <div className="label">
+                                                <span className="label-text text-xl">Description</span>
+                                            </div>
+                                            <textarea name="description" className="textarea textarea-bordered w-full" placeholder="Type here"></textarea>
+                                        </div>
                                     </div>
                                     {/* if there is a button in form, it will close the modal */}
-                                    <button onClick={() => document.getElementById('my_modal_5').close()} className="btn mt-4 bg-pink-600 hover:bg-pink-400">Apply</button>
+                                    <button onClick={() => document.getElementById(allvisa._id).close()} className="btn mt-4 bg-pink-600 hover:bg-pink-400">Apply</button>
                                 </form>
 
                             </div>

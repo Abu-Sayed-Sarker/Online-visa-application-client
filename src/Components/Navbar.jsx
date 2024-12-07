@@ -112,7 +112,7 @@ const Navbar = () => {
                                 <div
                                     className="hidden lg:block"
                                     data-tooltip-id="my-tooltip"
-                                    data-tooltip-content={`${user.email}`}
+                                    data-tooltip-content={`${user.displayName}`}
                                     data-tooltip-place="left"
                                 >
                                     <div className="avatar online pt-2">

@@ -50,7 +50,7 @@ const MyAddedVisa = () => {
                     </div>
                     <div className="pb-8 grid lg:grid-cols-4 gap-3 md:grid-cols-2 grid-cols-1 py-10">
                         {
-                            visas.map(allvisa => <MyaddedVisaCard key={allvisa._id} visas={visas} setVisas={setVisas} allvisa={allvisa}></MyaddedVisaCard>)
+                            visas.map(allvisa => <MyaddedVisaCard key={allvisa._id} visas={visas} setVisas={setVisas} visa={allvisa}></MyaddedVisaCard>)
                         }
                     </div>
                 </div>

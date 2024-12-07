@@ -87,9 +87,9 @@ const Addvisa = () => {
                                     </div>
                                     <select name="visa-type" className="select select-bordered w-full">
                                         <option disabled selected>Select Visa type</option>
-                                        <option>Tourist visa</option>
-                                        <option>Student visa</option>
-                                        <option>Official visa</option>
+                                        <option>Tourist-visa</option>
+                                        <option>Student-visa</option>
+                                        <option>Official-visa</option>
                                     </select>
                                 </label>
 
