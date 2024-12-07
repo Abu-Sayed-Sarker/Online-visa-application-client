@@ -24,7 +24,7 @@ const VisaCard = ({visa}) => {
                         </div>
                     </div>
                     <div className="card-actions justify-end">
-                        <Link to={`/deteils/${visa._id}`}><button className="btn btn-primary">See Details</button></Link>
+                        <Link to={`/deteils/${visa._id}`}><button className="btn bg-pink-600 hover:bg-pink-400">See Details</button></Link>
                         
                     </div>
                 </div>

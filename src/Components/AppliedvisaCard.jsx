@@ -57,7 +57,7 @@ const AppliedvisaCard = ({ visa, applications, setApplications }) => {
                         </div>
                     </div>
                     <div className="card-actions justify-end">
-                        <button onClick={()=> handelDelete(visa._id)} className="btn btn-primary">Cancel</button>
+                        <button onClick={()=> handelDelete(visa._id)} className="btn bg-pink-600 hover:bg-pink-400 w-full mt-3">Cancel</button>
 
                     </div>
                 </div>

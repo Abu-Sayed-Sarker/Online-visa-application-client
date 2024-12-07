@@ -10,7 +10,9 @@ const Ditails = () => {
 
 
     const [Dates, setDate] = useState(new Date());
-    const date = `${Dates.getDay()}/${Dates.getMonth()}/${Dates.getFullYear()}`
+    const date = `${Dates.getDate()}/${Dates.getMonth()+1}/${Dates.getFullYear()}`
+
+    
 
 
     const submitAddVisa = e => {
@@ -124,7 +126,7 @@ const Ditails = () => {
                                                 </div>
                                             </div>
                                             {/* if there is a button in form, it will close the modal */}
-                                            <button onClick={() => document.getElementById('my_modal_5').close()} className="btn mt-4 bg-pink-600 hover:bg-pink-400">Apply</button>
+                                            <button onClick={() => document.getElementById('my_modal_5').close()} className="btn mt-4 bg-pink-600 hover:bg-pink-400 w-full">Apply</button>
                                         </form>
 
                                     </div>
