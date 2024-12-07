@@ -5,7 +5,7 @@ import toast from "react-hot-toast";
 
 const MyaddedVisaCard = ({ visa, visas, setVisas }) => {
 
-    const [allvisa, setvisa] = useState(visa)
+    const [allvisa, setvisa] = useState(visa);
 
 
     const [currentVisaId, setCurrentVisaId] = useState(null);
@@ -14,8 +14,6 @@ const MyaddedVisaCard = ({ visa, visas, setVisas }) => {
     const [validaty, setVAlidaty] = useState(null);
     const [Fee, setFee] = useState(null);
 
-
-    console.log(currentVisaId)
 
 
 
@@ -37,7 +35,7 @@ const MyaddedVisaCard = ({ visa, visas, setVisas }) => {
     const submitUpdateVisa = async (e) => {
         e.preventDefault();
 
-        console.log(currentVisaId);
+      
 
 
         const form = new FormData(e.target);
@@ -65,7 +63,7 @@ const MyaddedVisaCard = ({ visa, visas, setVisas }) => {
             Processing_time: form.get("Processing_time") || allvisa.description,
             Required_documents: Required_documents
         };
-        console.log(updatedVisa.photo);
+   
 
 
         try {
@@ -79,6 +77,7 @@ const MyaddedVisaCard = ({ visa, visas, setVisas }) => {
             const result = await response.json();
 
             if (response.ok) {
+                setvisa(updatedVisa)
                 toast.success("Visa updated successfully!");
                 // Optionally refresh visas list here by re-fetching or updating state
 
@@ -92,19 +91,25 @@ const MyaddedVisaCard = ({ visa, visas, setVisas }) => {
     };
 
     return (
-        <div>
+        <div className="">
             <div className="card bg-base-100 shadow-xl">
-                <figure>
+                <figure className="">
                     <img
+                        className="h-60 w-full"
                         src={allvisa.photo}
                         alt="Shoes" />
+                    
                 </figure>
-                <div className="card-body">
+                <div className="card-body max-h-[550px]">
                     <h2 className="card-title">{allvisa.country}</h2>
                     <div className="flex justify-between">
                         <div>
                             <p className="font-semibold">Visa type</p>
                             <p>{allvisa.visaType}</p>
+                        </div>
+                        <div>
+                            <p className="font-semibold">Visa Fee</p>
+                            <p>{allvisa.fee}$</p>
                         </div>
                         <div>
                             <p className="font-semibold">Visa Fee</p>
@@ -117,6 +122,10 @@ const MyaddedVisaCard = ({ visa, visas, setVisas }) => {
                             <p>{allvisa.Validity}</p>
                         </div>
                         <div>
+                            <p className="font-semibold">Age Limit</p>
+                            <p>{allvisa.Age}</p>
+                        </div>
+                        <div>
                             <p className="font-semibold">Processing time</p>
                             <p>{allvisa.Processing_time}</p>
                         </div>
@@ -125,11 +134,11 @@ const MyaddedVisaCard = ({ visa, visas, setVisas }) => {
                         <p className="font-semibold border-b-2">Method</p>
                         <p>{allvisa.method}</p>
                     </div>
-                    <div className="text-center">
+                    <div className="text-center h-24">
                         <p className="font-semibold border-b-2">Documents</p>
-                        <p>{allvisa.Required_documents}</p>
+                        <p className="text-left">{allvisa.Required_documents.map((d, index) => <li className="list-none" key={index}>{ d == "" ? "" : `=> ${d}` }</li>)}</p>
                     </div>
-                    <div className="text-center">
+                    <div className="text-center h-24">
                         <p className="font-semibold border-b-2">Description</p>
                         <p>{allvisa.description}</p>
                     </div>

@@ -15,7 +15,7 @@ const MyaddedApplication = () => {
 
 
     const [applications, setApplications] = useState(allApplication)
-    console.log(applications);
+    
 
 
 
