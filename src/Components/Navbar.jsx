@@ -77,8 +77,8 @@ const Navbar = () => {
                             <NavLink to={'/'}><li className="hover:bg-pink-600 font-semibold uppercase rounded-full"><a>HOME</a></li></NavLink>
                             <NavLink to={'/allvisa'}><li className="hover:bg-pink-600 font-semibold uppercase rounded-full"><a>All visas</a></li></NavLink>
                             <NavLink to={'/addvisa'}><li className="hover:bg-pink-600 font-semibold uppercase rounded-full"><a>Add Visa</a></li></NavLink>
-                            <NavLink to={'/addedvisa'}><li className="hover:bg-pink-600 font-semibold uppercase rounded-full"><a>My added visas</a></li></NavLink>
-                            <NavLink to={'/visaapplications'}><li className="hover:bg-pink-600 font-semibold uppercase rounded-full"><a>My Visa applications</a></li></NavLink>
+                            <NavLink to={user?.email ? `/addedvisa/${user.email}` : '/login'}><li className="hover:bg-pink-600 font-semibold uppercase rounded-full"><a>My added visas</a></li></NavLink>
+                            <NavLink to={user?.email ? `/visaapplications/${user.email}` : '/login'}><li className="hover:bg-pink-600 font-semibold uppercase rounded-full"><a>My Visa applications</a></li></NavLink>
                         </ul>
                     </div>
                     <a className="text-pink-600 font-bold text-2xl">E-visa</a>
