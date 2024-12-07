@@ -24,6 +24,7 @@ const AppliedvisaCard = ({ visa, applications, setApplications }) => {
             <div className="card bg-base-100 shadow-xl">
                 <figure>
                     <img
+                        className="h-48 w-full"
                         src={visa.img}
                         alt="Shoes" />
                 </figure>

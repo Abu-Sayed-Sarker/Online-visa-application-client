@@ -8,6 +8,7 @@ const VisaCard = ({visa}) => {
             <div className="card bg-base-100 shadow-xl">
                 <figure>
                     <img
+                        className="h-60 w-full"
                         src={visa.photo}
                         alt="Shoes" />
                 </figure>
@@ -35,8 +36,8 @@ const VisaCard = ({visa}) => {
                         <div>
                             <p className="font-semibold">Visa Fee</p>
                             <p>{ visa.fee}$</p>
-                            <p className="font-semibold">Applied Date</p>
-                            <p></p>
+                            <p className="font-semibold">Age restriction</p>
+                            <p>{ visa.Age} Years</p>
                         </div>
                     </div>
                     <div className="card-actions justify-end">

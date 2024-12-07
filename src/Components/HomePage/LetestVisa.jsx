@@ -21,7 +21,7 @@ const LetestVisa = () => {
 
     return (
         <div className="w-10/12 mx-auto pt-7">
-            <Slide><h1 className="lg:text-5xl text-2xl text-pink-600 font-semibold">Latest visas section</h1></Slide>
+            <Slide><h1 className="lg:text-5xl text-2xl text-pink-600 font-semibold">Latest visas</h1></Slide>
             <div className="grid lg:grid-cols-3 gap-3 py-10">
                 {
                     letestVisa.map(visa => <VisaCard key={visa._id} visa={visa}></VisaCard>)

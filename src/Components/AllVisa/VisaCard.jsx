@@ -8,6 +8,7 @@ const VisaCard = ({visa}) => {
             <div className="card bg-base-100 shadow-xl">
                 <figure>
                     <img
+                        className="h-48 w-full"
                         src={visa.photo}
                         alt="Shoes" />
                 </figure>
