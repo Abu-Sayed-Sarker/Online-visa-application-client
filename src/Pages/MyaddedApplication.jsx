@@ -20,7 +20,7 @@ const MyaddedApplication = () => {
 
 
     useEffect(() => {
-        fetch(`https://visa-navigate-server.vercel.app/addedvisa?searchParams=${scarch}`)
+        fetch(`https://visa-navigate-server.vercel.app/addedvisa/${email}?searchParams=${scarch}`)
             .then(res => res.json())
             .then(data => {
                 setApplications(data)
