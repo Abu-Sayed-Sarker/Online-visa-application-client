@@ -3,6 +3,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import DatePicker from "react-datepicker";
 import { useContext, useState } from "react";
 import { AuthContext } from "../Provider/AuthProvider";
+import toast from "react-hot-toast";
 
 const Ditails = () => {
     const { user } = useContext(AuthContext)
@@ -45,6 +46,7 @@ const Ditails = () => {
             .then(res => res.json())
             .then(data => {
                 console.log(data);
+                toast.success("Application Successfully Added")
                 e.target.reset();
 
             })
@@ -97,9 +99,7 @@ const Ditails = () => {
                                     </div>
                                     <div>
                                         <p className="font-semibold text-xl">Required documents</p>
-                                        {
-                                            visa.Required_documents.map((d, index) => <li className="list-none" key={index}>{d}</li>)
-                                        }
+                                        <p className="text-left">{visa.Required_documents.map((d, index) => <li className="list-none" key={index}>{ d == "" ? "" : `=> ${d}` }</li>)}</p>
                                     </div>
                                 </div>
 

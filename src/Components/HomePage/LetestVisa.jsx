@@ -1,17 +1,16 @@
 import { useEffect, useState } from "react";
 import VisaCard from "./VisaCard";
 import { Slide } from "react-awesome-reveal";
+import { Link } from "react-router-dom";
 
 const LetestVisa = () => {
 
-    const [visas, setVisa] = useState([])
+    const [letestVisa, setVisa] = useState([])
 
-
-    const letestVisa = visas.slice(-6)
     
 
     useEffect(() => {
-        fetch("https://visa-navigate-server.vercel.app/visas")
+        fetch("https://visa-navigate-server.vercel.app/visas/limited")
             .then(res => res.json())
             .then(data => {
             setVisa(data)
@@ -27,6 +26,7 @@ const LetestVisa = () => {
                     letestVisa.map(visa => <VisaCard key={visa._id} visa={visa}></VisaCard>)
                 }
             </div>
+            <Link to={"/allvisa"}><button className="btn bg-pink-600 hover:bg-pink-400">See all visas</button></Link>
             
         </div>
     );

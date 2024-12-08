@@ -12,40 +12,40 @@ const VisaCatagory = () => {
                     </div>
                     <h4 className="text-2xl font-medium text-pink-600 py-3">Education Visa</h4>
                     <p>
-                        Porta semper lacus cursus, feugiat primis ultrice in ligula risus auctor a tempus feugiat dolor and lacinia blandit ligula posuere at feugiat
+                        An education visa permits studying abroad legally, requiring proof of admission, financial stability, and language proficiency. It lasts the program&apos;s duration and may need renewal for extended studies
                     </p>
 
                 </div>
 
                 <div className="p-5">
                     <div className="text-9xl">
-                    <HiMiniUsers />
+                        <HiMiniUsers />
                     </div>
                     <h4 className="text-2xl font-medium text-pink-600 py-3">Job Seeker Visa</h4>
                     <p>
-                        Porta semper lacus cursus, feugiat primis ultrice in ligula risus auctor a tempus feugiat dolor and lacinia blandit ligula posuere at feugiat
+                        A job seeker visa allows individuals to enter a country to search for employment. It typically requires qualifications, proof of financial means, and is valid for a limited duration
                     </p>
 
                 </div>
 
                 <div className="p-5">
                     <div className="text-9xl">
-                    <FaToolbox />
+                        <FaToolbox />
                     </div>
                     <h4 className="text-2xl font-medium text-pink-600 py-3">PR Visa</h4>
                     <p>
-                        Porta semper lacus cursus, feugiat primis ultrice in ligula risus auctor a tempus feugiat dolor and lacinia blandit ligula posuere at feugiat
+                        A PR (Permanent Resident) visa grants individuals the right to live, work, and study indefinitely in a foreign country while retaining citizenship of their home country, with potential benefits.
                     </p>
 
                 </div>
 
                 <div className="p-5">
                     <div className="text-9xl">
-                    <FaEarthAmericas />
+                        <FaEarthAmericas />
                     </div>
                     <h4 className="text-2xl font-medium text-pink-600 py-3">Tourist & Visitor Visa</h4>
                     <p>
-                        Porta semper lacus cursus, feugiat primis ultrice in ligula risus auctor a tempus feugiat dolor and lacinia blandit ligula posuere at feugiat
+                        A tourist or visitor visa allows individuals to enter a country temporarily for leisure, sightseeing, or visiting friends and family. It usually has a short validity period and specific restrictions.
                     </p>
 
                 </div>
