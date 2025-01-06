@@ -53,8 +53,8 @@ const Navbar = () => {
 
 
     return (
-        <div className="lg:w-10/12 mx-auto w-11/12">
-            <div className="navbar bg-base-100">
+        <div className="fixed z-10 bg-base-100/50 backdrop-blur-xl w-full">
+            <div className="navbar mx-auto w-11/12">
                 <div className="navbar-start">
                     <div className="dropdown">
                         <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -76,20 +76,24 @@ const Navbar = () => {
                             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
                             <NavLink to={'/'}><li className="hover:bg-pink-600 font-semibold uppercase rounded-full"><a>HOME</a></li></NavLink>
                             <NavLink to={'/allvisa'}><li className="hover:bg-pink-600 font-semibold uppercase rounded-full"><a>All visas</a></li></NavLink>
+                            <NavLink to={'/contactUs'}><li className="hover:bg-pink-600 font-semibold uppercase rounded-full"><a>Contact US</a></li></NavLink>
+                            <NavLink to={'/aboutUs'}><li className="hover:bg-pink-600 font-semibold uppercase rounded-full"><a>About US</a></li></NavLink>
                             <NavLink to={'/addvisa'}><li className="hover:bg-pink-600 font-semibold uppercase rounded-full"><a>Add Visa</a></li></NavLink>
-                            <NavLink to={user?.email ? `/addedvisa/${user.email}` : '/login'}><li className="hover:bg-pink-600 font-semibold uppercase rounded-full"><a>My added visas</a></li></NavLink>
-                            <NavLink to={user?.email ? `/visaapplications/${user.email}` : '/login'}><li className="hover:bg-pink-600 font-semibold uppercase rounded-full"><a>My Visa applications</a></li></NavLink>
+                            <NavLink to={user?.email ? `/addedvisa/${user.email}` : '/login'}><li className="hover:bg-pink-600 font-semibold uppercase rounded-full"><a>My visas</a></li></NavLink>
+                            <NavLink to={user?.email ? `/visaapplications/${user.email}` : '/login'}><li className="hover:bg-pink-600 font-semibold uppercase rounded-full"><a>My applications</a></li></NavLink>
                         </ul>
                     </div>
-                    <a className="text-pink-600 font-bold text-2xl">E-visa</a>
+                    <a className="font-bold text-2xl">E-<span className="text-pink-600">VISA</span></a>
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal px-1">
                         <NavLink to={'/'}><li className="hover:bg-pink-600 font-semibold uppercase rounded-full"><a>HOME</a></li></NavLink>
                         <NavLink to={'/allvisa'}><li className="hover:bg-pink-600 font-semibold uppercase rounded-full"><a>All visas</a></li></NavLink>
-                        <NavLink to={'/addvisa'}><li className="hover:bg-pink-600 font-semibold uppercase rounded-full"><a>Add Visa</a></li></NavLink>
-                        <NavLink to={user?.email ? `/addedvisa/${user.email}` : '/login'}><li className="hover:bg-pink-600 font-semibold uppercase rounded-full"><a>My added visas</a></li></NavLink>
-                        <NavLink to={user?.email ? `/visaapplications/${user.email}` : '/login'}><li className="hover:bg-pink-600 font-semibold uppercase rounded-full"><a>My Visa applications</a></li></NavLink>
+                        <NavLink to={'/contactUs'}><li className="hover:bg-pink-600 font-semibold uppercase rounded-full"><a>Contact US</a></li></NavLink>
+                        <NavLink to={'/aboutUs'}><li className="hover:bg-pink-600 font-semibold uppercase rounded-full"><a>About US</a></li></NavLink>
+                        {user && <NavLink to={'/addvisa'}><li className="hover:bg-pink-600 font-semibold uppercase rounded-full"><a>Add Visa</a></li></NavLink>}
+                        {user && <NavLink to={user?.email ? `/addedvisa/${user.email}` : '/login'}><li className="hover:bg-pink-600 font-semibold uppercase rounded-full"><a>My added visas</a></li></NavLink>}
+                        {user && <NavLink to={user?.email ? `/visaapplications/${user.email}` : '/login'}><li className="hover:bg-pink-600 font-semibold uppercase rounded-full"><a>My Visa applications</a></li></NavLink>}
 
                     </ul>
                 </div>

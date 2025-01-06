@@ -4,11 +4,11 @@ import img from "../../assets/world-map.png"
 
 const FindVisa = () => {
     return (
-        <div className="w-10/12 mx-auto mt-5 py-10 space-y-3">
+        <div className="w-10/12 mx-auto mt-5 pt-10 space-y-3">
             <Slide><h1 className="lg:text-5xl text-2xl text-pink-600 font-semibold">Find a consultant by:</h1></Slide>
             <Fade><p className="lg:text-xl text-base text-pink-400 lg:w-[60%]">Cursus porta, feugiat primis in ultrice ligula risus auctor tempus dolor feugiat, felis lacinia risus interdum auctor id viverra dolor iaculis luctus placerat and massa</p></Fade>
 
-            <div className="grid lg:grid-cols-2 grid-cols-1 pt-4 pb-20">
+            <div className="grid lg:grid-cols-2 grid-cols-1 pt-4">
                 <div className="flex justify-between lg:pr-10">
                     <div>
                         <h1 className="text-2xl font-semibold text-pink-500">Country:</h1>
@@ -39,7 +39,7 @@ const FindVisa = () => {
                     <img src={img} alt="" />
                 </div>
             </div>
-            
+
         </div>
     );
 };

@@ -11,9 +11,9 @@ const Ditails = () => {
 
 
     const [Dates, setDate] = useState(new Date());
-    const date = `${Dates.getDate()}/${Dates.getMonth()+1}/${Dates.getFullYear()}`
+    const date = `${Dates.getDate()}/${Dates.getMonth() + 1}/${Dates.getFullYear()}`
 
-    
+
 
 
     const submitAddVisa = e => {
@@ -57,8 +57,8 @@ const Ditails = () => {
             <div className="mx-auto w-10/12">
                 <h1 className="text-center py-5 lg:text-5xl text-3xl font-bold text-pink-600">VISA DITAILS</h1>
                 <div>
-                    <div className="card bg-base-100 shadow-xl">
-                        <figure className="px-10 pt-10">
+                    <div className="card bg-base-100 shadow-xl flex lg:flex-row md:flex-row flex-col">
+                        <figure className="px-10 pt-10 lg:pb-10 md:pb-10">
                             <img
 
                                 src={visa.photo}
@@ -68,8 +68,8 @@ const Ditails = () => {
                         <div className="card-body lg:w-9/12 mx-auto">
                             <h2 className="text-center mx-auto card-title text-4xl pb-5">{visa.country}</h2>
                             <div>
-                                <div className="flex lg:justify-between lg:flex-row flex-col justify-center lg:text-left text-center">
-                                    <div>
+                                <div className="">
+                                    <div className="flex justify-between text-left">
                                         <label>
                                             <p className="font-semibold text-xl">Visa Type</p>
                                             <p>{visa.visaType}</p>
@@ -78,36 +78,40 @@ const Ditails = () => {
                                             <p className="font-semibold text-xl">Visa Validity time</p>
                                             <p>{visa.Validity}</p>
                                         </label>
-                                        <label>
-                                            <p className="font-semibold text-xl">Description</p>
-                                            <p>{visa.description}</p>
-                                        </label>
                                     </div>
-                                    <div>
+                                    <div className="flex justify-between text-left">
                                         <label>
                                             <p className="font-semibold text-xl">Visa Fee</p>
-                                            <p>{visa.fee}</p>
+                                            <p>{visa.fee} $</p>
                                         </label>
                                         <label>
                                             <p className="font-semibold text-xl">Processing time</p>
                                             <p>{visa.Processing_time}</p>
                                         </label>
+
+                                    </div>
+                                    <div className="flex justify-between text-left">
                                         <label>
                                             <p className="font-semibold text-xl">Application method</p>
                                             <p>{visa.method}</p>
                                         </label>
+                                        <div>
+                                            <p className="font-semibold text-xl">Required documents</p>
+                                            <p className="text-left">{visa.Required_documents.map((d, index) => <li className="list-none" key={index}>{d == "" ? "" : `=> ${d}`}</li>)}</p>
+                                        </div>
                                     </div>
-                                    <div>
-                                        <p className="font-semibold text-xl">Required documents</p>
-                                        <p className="text-left">{visa.Required_documents.map((d, index) => <li className="list-none" key={index}>{ d == "" ? "" : `=> ${d}` }</li>)}</p>
-                                    </div>
+                                    <label>
+                                        <p className="font-semibold text-xl">Description</p>
+                                        <p>{visa.description}</p>
+                                    </label>
+
                                 </div>
 
 
                             </div>
                             <div className="card-actions">
                                 {/* Open the modal using document.getElementById('ID').showModal() method */}
-                                <button className="mt-5 btn mx-auto bg-pink-600 hover:bg-pink-400" onClick={() => document.getElementById('my_modal_5').showModal()}>Apply Now</button>
+                                <button className="mt-5 btn bg-pink-600 hover:bg-pink-400" onClick={() => document.getElementById('my_modal_5').showModal()}>Apply Now</button>
                                 <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
                                     <div className="modal-box">
 

@@ -4,11 +4,11 @@ import { Toaster } from "react-hot-toast";
 import Footer from "../Components/Footer";
 
 const Layout = () => {
-    
+
     return (
         <div>
             <Navbar></Navbar>
-            <Outlet></Outlet>
+            <div className="pt-[76px]"><Outlet></Outlet></div>
             <Toaster></Toaster>
             <Footer></Footer>
         </div>

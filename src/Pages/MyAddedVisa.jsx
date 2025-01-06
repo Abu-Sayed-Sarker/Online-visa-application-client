@@ -48,10 +48,26 @@ const MyAddedVisa = () => {
                             </div>
                         }
                     </div>
-                    <div className="pb-8 grid lg:grid-cols-3 gap-3 md:grid-cols-2 grid-cols-1 py-10">
-                        {
-                            visas.map(allvisa => <MyaddedVisaCard key={allvisa._id} visas={visas} setVisas={setVisas} visa={allvisa}></MyaddedVisaCard>)
-                        }
+                    <div className="overflow-x-auto">
+                        <table className="table">
+                            {/* head */}
+                            <thead>
+                                <tr>
+                                    <th>Visa Image</th>
+                                    <th>Country</th>
+                                    <th>Price</th>
+                                    <th>Type</th>
+                                    <th>Description</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {
+                                    visas.map(allvisa => <MyaddedVisaCard key={allvisa._id} visas={visas} setVisas={setVisas} visa={allvisa}></MyaddedVisaCard>)
+                                }
+                            </tbody>
+                        </table>
+
                     </div>
                 </div>
             </div>

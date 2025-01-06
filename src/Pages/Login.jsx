@@ -11,7 +11,7 @@ const Login = () => {
     const { GoogleLogin, LogIn, setuser } = useContext(AuthContext)
 
     const navigate = useNavigate()
-    
+
 
     const provider = new GoogleAuthProvider()
 
@@ -24,32 +24,32 @@ const Login = () => {
 
 
         LogIn(email, password)
-        .then((result) => {
-            const user = result.user;
-            setuser(user)
-            e.target.reset();
-            toast.success("Log In Success");
-            navigate("/")
+            .then((result) => {
+                const user = result.user;
+                setuser(user)
+                e.target.reset();
+                toast.success("Log In Success");
+                navigate("/")
 
-        })
-        .catch((error) => {
-            const errorCode = error.code;
+            })
+            .catch((error) => {
+                const errorCode = error.code;
 
-            toast.error(errorCode)
-            
+                toast.error(errorCode)
 
-        });
-        
-        
+
+            });
+
+
     }
 
 
     const googleLogInBtn = () => {
         GoogleLogin(provider)
-        .then((result) => {
-            setuser(result.user)
-            toast.success("Log In Success");
-            navigate("/")
+            .then((result) => {
+                setuser(result.user)
+                toast.success("Log In Success");
+                navigate("/")
             }).catch((error) => {
                 // Handle Errors here.
                 const errorCode = error.code

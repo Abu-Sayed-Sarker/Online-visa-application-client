@@ -15,7 +15,7 @@ const MyaddedApplication = () => {
 
 
     const [applications, setApplications] = useState(allApplication)
-    
+
 
 
 
@@ -77,10 +77,25 @@ const MyaddedApplication = () => {
                         </div>
                     </div>
                 }
-                <div className="grid lg:grid-cols-4 gap-3 md:grid-cols-2 grid-cols-1 py-8">
-                    {applications.map(visa => (
-                        <AppliedvisaCard key={visa._id} visa={visa} setApplications={setApplications} applications={applications} />
-                    ))}
+                <div className="overflow-x-auto">
+                    <table className="table">
+                        {/* head */}
+                        <thead>
+                            <tr>
+                                <th>Visa Image</th>
+                                <th>Country</th>
+                                <th>Price</th>
+                                <th>Type</th>
+                                <th>Date</th>
+                                <th>Cancel</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {applications.map(visa => (
+                                <AppliedvisaCard key={visa._id} visa={visa} setApplications={setApplications} applications={applications} />
+                            ))}
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
